@@ -25,6 +25,15 @@ export default {
       fp: null
     }
   },
+  watch: {
+    options (opt, oldOpt) {
+      for (let o in opt) {
+        if (opt[o] !== oldOpt[o]) {
+          this.fp.set(o, opt[o])
+        }
+      }
+    }
+  },
   mounted () {
     this.fp = new Flatpickr(this.$el, this.options)
     this.$emit('FlatpickrRef', this.fp)

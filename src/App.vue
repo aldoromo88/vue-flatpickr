@@ -4,7 +4,12 @@
     <h4>V 2.2.0</h4>
     <p>The date you picked is</p>
     <p>{{dateStr}}</p>
-    <Flatpickr :options="fpOptions" v-model="dateStr" />
+    <Flatpickr v-model="dateStr" />
+    <p>Date range example</p>
+    <div>
+      <Flatpickr placeholder="From" v-model="dateFrom" :options="optionsFrom" />
+      <Flatpickr placeholder="To" v-model="dateTo" :options="optionsTo" />
+    </div>
     <p>
       Read more in <a href="https://chmln.github.io/flatpickr/" target="_blank">Officail Document</a>
     </p>
@@ -17,7 +22,20 @@ export default {
   data () {
     return {
       dateStr: 'YYYY-MM-DD',
-      fpOptions: {}
+      dateFrom: undefined,
+      dateTo: undefined
+    }
+  },
+  computed: {
+    optionsFrom () {
+      return {
+        maxDate: this.dateTo
+      }
+    },
+    optionsTo () {
+      return {
+        minDate: this.dateFrom
+      }
     }
   },
   components: {
