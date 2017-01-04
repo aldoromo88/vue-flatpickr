@@ -1,95 +1,113 @@
-# vue-flatpickr (for VueJS 2.0)
-A Vue component that wraps the [Flatpickr](https://github.com/chmln/flatpickr).
+# Vue-Flatpickr (^2.2.0)
+`Flatpickr` for `VueJS` bases on the lastest version of [Flatpickr](https://github.com/chmln/flatpickr) (^2.2.5).
 
 Demo: [https://jrainlau.github.io/vue-flatpickr/](https://jrainlau.github.io/vue-flatpickr/)
 
-> Check out the `master` branch to view the `vue-flatpickr` for VueJS 1.0
+> Version 2.x supports `VueJS 2.x` only. Check out the `master` branch  for supporting `VueJS 1.0`
 
 ## Install
 ```
-npm install vue-flatpickr
+npm install vue-flatpickr --save
 ```
 
 ## Usage
-Enter one of your `.vue` file, load the instance `VueFlatpickr-en.vue` (or `VueFlatpickr-zh` for Chinese),  and the stylesheet `flatpickr.min.css`.
-> Note that you have set the path correctly. For example, you might set the path as `../node_modules/vue-flatpickr/vue-flatpickr-default.vue` and so on.
-
+Enter your `main.js` file which inits the `VueJS`:
 ```
-<template>
-  <Flatpickr />
-</template>
+import Vue from 'vue'
+import App from './App.vue'
+import VueFlatpickr from 'vue-flatpickr'
+import 'vue-flatpickr/theme/airbnb.css'
 
-<script>
-import Flatpickr from './vue-flatpickr-default.vue'
+Vue.use(VueFlatpickr)
 
-export default {
-  components: {
-    Flatpickr
-  }
-}
-</script>
+new Vue({
+  el: '#app',
+  ...App
+})
+```
+then you can use `Vue-Flatpickr` directly in your `*.vue` file:
+```
+<Flatpickr />
 ```
 
 ## Options
-Use `props` to pass the **options object** to `vue-flatpickr`. The options are same to the [official document](https://chmln.github.io/flatpickr/#options). And you could pass a default message to the instance by the props **message**. Here is an example below:
+Use `props` to pass an option object to `Vue-Flatpickr`:
 ```
 <!-- template -->
-<Flatpickr :value='msg' :options='options' />
+<Flatpickr :options="fpOptions" />
+```
 
+```
 <!-- script -->
 data () {
-    return {
-      msg: 'Click here to pick a date.',
-      options: {
-        allowInput: true
-      }
-    }
+  return {
+    fpOptions: {}
   }
+}
 ```
+> `Vue-Flatpickr` supports all options as the [Official Document](https://chmln.github.io/flatpickr/), except the *"Custom elements and input groups"*
 
 ## Data binding
-The  `<Flatpickr />` tag could be use as a normal `<input>` tag, your root component could use `v-on:input='your_methods'` to receive the data comes from `<Flatpickr />`.
+`Vue-Flatpickr` supports `v-model` for data binding:
 ```
 <!-- template -->
-<Flatpickr @input='update'/>
-
-<!-- script -->
-data () {
-    return {
-      msg: 'Click here to pick a date.'
-    }
-  },
-methods: {
-    update (val) {
-      this.msg = val
-    }
-  }
+<Flatpickr v-model="dateStr" />
 ```
 
-Using v-model on `<Flatpickr />` tag as a short-hand
 ```
-<!-- template -->
-<Flatpickr v-model='myDate'/>
-
 <!-- script -->
 data () {
-    return {
-      myDate: ''
-    }
+  return {
+    dateStr: ''
   }
+}
 ```
 
 ## Themes
-`vue-flatpickr` supports all the offical themes, all you need to do is to pick up the one you like:
-- `vue-flatpickr-default.vue`
-- `vue-flatpickr-airbnb.vue`
-- `vue-flatpickr-base16.vue`
-- `vue-flatpickr-confetti.vue`
-- `vue-flatpickr-dark.vue`
-- `vue-flatpickr-material_blue.vue`
-- `vue-flatpickr-material_green.vue`
-- `vue-flatpickr-material_orange.vue`
-- `vue-flatpickr-material_red.vue`
+`Vue-Flatpickr` supports all the offical themes. You should import the theme you like from `vue-flatpickr/theme` after you've imported the `VueFlatpickr`.
+```
+import VueFlatpickr from 'vue-flatpickr'
+import 'vue-flatpickr/theme/airbnb.css'
+```
+
+Themes you could use:
+- `airbnb.css`
+- `base16_flat.css`
+- `confetti.css`
+- `dark.css`
+- `flatpickr.min.css`
+- `material_blue.css`
+- `material_green.css`
+- `material_orange.css`
+- `material_red.css`
+
+## Development
+
+- Run dev
+
+```
+git clone https://github.com/jrainlau/vue-flatpickr.git
+
+cd vue-flatpickr && npm install
+
+npm run dev
+```
+
+- Run build-demo
+
+```
+npm run build-demo
+```
+then checkout the `/dist` folder for demo.
+
+- Run build
+
+```
+npm run build
+```
+then checkout the `/dist` folder for bundle.
+
+> `Vue-Flatpickr` is using `eslint-standar`, all pull request must follow the standar nor not allow to be merged.
 
 ## Lisense
 MIT
